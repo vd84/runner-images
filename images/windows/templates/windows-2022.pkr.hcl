@@ -148,6 +148,11 @@ variable "vm_size" {
   default = "Standard_F8s_v2"
 }
 
+variable "build_key_vault_name" {
+  type    = string
+  default = "${env("BUILD_KEY_VAULT_NAME")}"
+}
+
 source "azure-arm" "image" {
   allowed_inbound_ip_addresses           = "${var.allowed_inbound_ip_addresses}"
   build_resource_group_name              = "${var.build_resource_group_name}"
@@ -173,6 +178,7 @@ source "azure-arm" "image" {
   virtual_network_resource_group_name    = "${var.virtual_network_resource_group_name}"
   virtual_network_subnet_name            = "${var.virtual_network_subnet_name}"
   vm_size                                = "${var.vm_size}"
+  build_key_vault_name                   = "${var.build_key_vault_name}"
   winrm_insecure                         = "true"
   winrm_use_ssl                          = "true"
   winrm_username                         = "packer"
